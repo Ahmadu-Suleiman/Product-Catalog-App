@@ -1,12 +1,13 @@
 class Product {
-  int? id;
+  String? id;
   String name;
   int quantity;
   double price;
   String imageUrl;
 
   Product(
-      {required this.name,
+      {this.id,
+      required this.name,
       required this.quantity,
       required this.price,
       required this.imageUrl});
