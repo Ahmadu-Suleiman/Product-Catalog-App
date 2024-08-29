@@ -12,7 +12,7 @@ class Database {
   static Future<void> updateProduct(Product product) async =>
       await products.doc(product.id).delete();
 
-  static Stream get productsStream => products.snapshots();
+  static Stream<QuerySnapshot> get productsStream => products.snapshots();
 
   static List<Product> productsFromDocs(QuerySnapshot snapshot) {
     List<DocumentSnapshot> documents = snapshot.docs;

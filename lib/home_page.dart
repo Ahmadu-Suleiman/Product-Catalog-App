@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_catalog_app/firebase/database.dart';
 import 'package:product_catalog_app/product.dart';
+import 'package:product_catalog_app/widgets/product_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,9 +22,11 @@ class _HomePageState extends State<HomePage> {
             return const CircularProgressIndicator();
           }
 
-          List<Product> products=Database.productsFromDocs(snapshot);
-          return return ListView.builder(
-              itemCount: items.length,itemBuilder: (context, index) =>)
+          List<Product> products = Database.productsFromDocs(snapshot.data!);
+          return ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) =>
+                  ProductCard(product: products[index]));
         });
   }
 }
