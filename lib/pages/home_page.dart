@@ -26,7 +26,11 @@ class _HomePageState extends State<HomePage> {
           List<Product> products = Database.productsFromDocs(snapshot.data!);
           return Scaffold(
               appBar: AppBar(
-                  title: const Text('Product Catalog'), centerTitle: true),
+                  title: const Text('Product Catalog',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  centerTitle: true,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer),
               body: products.isEmpty
                   ? const Center(child: Text('Add Products'))
                   : ListView.builder(

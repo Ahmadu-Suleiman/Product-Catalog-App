@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,28 +19,26 @@ class AddProductPage extends StatefulWidget {
 
 class _AddProductPageState extends State<AddProductPage> {
   bool creating = false;
-  Uint8List? localImage;
+  String? localImage;
   final ImagePicker picker = ImagePicker();
   final formKey = GlobalKey<FormState>();
   final Product product = Product.empty();
 
   @override
   Widget build(BuildContext context) {
-    if (creating) {
-      return const LoadingWidget(text: 'Creating Product');
-    } else {
-      return Scaffold(
-          appBar: AppBar(title: const Text('Add a new Product')),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(8),
-            child: Column(children: [
-              Align(child: addImageWidget),
-              ProductDetailsWidget(product: product, formKey: formKey),
-              ElevatedButton(
-                  onPressed: createProduct, child: const Text('Create Product'))
-            ]),
-          ));
-    }
+    return creating
+        ? const LoadingWidget(text: 'Creating Product')
+        : Scaffold(
+            appBar: AppBar(title: const Text('Add a new Product')),
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(8),
+                child: Column(children: [
+                  Align(child: addImageWidget),
+                  ProductDetailsWidget(product: product, formKey: formKey),
+                  ElevatedButton(
+                      onPressed: createProduct,
+                      child: const Text('Create Product'))
+                ])));
   }
 
   Widget get addImageWidget {
@@ -48,7 +46,7 @@ class _AddProductPageState extends State<AddProductPage> {
       return Column(children: [
         Image(
             height: 400,
-            image: MemoryImage(localImage!),
+            image: FileImage(File(localImage!)),
             errorBuilder: (context, error, stackTrace) =>
                 const Icon(Icons.error),
             fit: BoxFit.fitWidth),
@@ -67,9 +65,9 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   void addImage() async {
-    Uint8List? image;
+    String? image;
     XFile? file = await picker.pickImage(source: ImageSource.gallery);
-    if (file != null) image = await file.readAsBytes();
+    if (file != null) image = file.path;
     setState(() => localImage = image);
   }
 

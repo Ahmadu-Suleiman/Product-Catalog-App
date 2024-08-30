@@ -7,8 +7,10 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child:
-            Column(children: [const CircularProgressIndicator(), Text(text)]));
+    return Scaffold(
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [const CircularProgressIndicator(), Text(text)])));
   }
 }

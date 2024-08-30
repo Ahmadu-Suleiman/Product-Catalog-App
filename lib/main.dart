@@ -5,6 +5,7 @@ import 'package:product_catalog_app/routes.dart';
 import 'firebase/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }

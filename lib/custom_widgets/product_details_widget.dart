@@ -38,9 +38,9 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
     controllerDescription.addListener(
         () => product.description = controllerDescription.text.trim());
     controllerPrice.addListener(() =>
-        product.price = double.tryParse(controllerName.text.trim()) ?? 0.0);
-    controllerQuantity.addListener(
-        () => product.quantity = int.tryParse(controllerName.text.trim()) ?? 0);
+        product.price = double.tryParse(controllerPrice.text.trim()) ?? 0.0);
+    controllerQuantity.addListener(() =>
+        product.quantity = int.tryParse(controllerQuantity.text.trim()) ?? 0);
   }
 
   @override
