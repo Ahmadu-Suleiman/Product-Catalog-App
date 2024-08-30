@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:product_catalog_app/firebase/database.dart';
 import 'package:product_catalog_app/models/product.dart';
 import 'package:product_catalog_app/widgets/product_card.dart';
@@ -33,7 +34,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) =>
                           ProductCard(product: products[index])),
               floatingActionButton: FloatingActionButton(
-                  onPressed: () {}, child: const Icon(Icons.add)));
+                  onPressed: () => context.go('/add-product'),
+                  child: const Icon(Icons.add)));
         });
   }
 }

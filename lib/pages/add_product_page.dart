@@ -18,22 +18,29 @@ class _AddProductPageState extends State<AddProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      addImageWidget,
-    ]);
+    return Scaffold(
+        appBar: AppBar(title: const Text('Add a new Product')),
+        body: Column(children: [
+          Align(child: addImageWidget),
+        ]));
   }
 
-  Widget get addImageWidget => GestureDetector(
-      onTap: addImage,
-      child: SizedBox(
+  Widget get addImageWidget => localImage != null
+      ? Column(children: [
+          Image(
+              height: 400,
+              image: MemoryImage(localImage!),
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.error),
+              fit: BoxFit.fitWidth),
+          const SizedBox(height: 20),
+          TextButton(onPressed: addImage, child: const Text('Replace image'))
+        ])
+      : SizedBox(
           height: 400,
-          child: localImage != null
-              ? Image(
-                  image: MemoryImage(localImage!),
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.error),
-                  fit: BoxFit.fitWidth)
-              : const Center(child: Text('Add image'))));
+          child: Center(
+              child: TextButton(
+                  onPressed: addImage, child: const Text('Add image'))));
 
   void addImage() async {
     Uint8List? image;
