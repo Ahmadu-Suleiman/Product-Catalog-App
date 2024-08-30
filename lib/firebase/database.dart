@@ -20,6 +20,7 @@ class Database {
         .map((document) => Product(
             id: document.id,
             name: document['name'],
+            description: document['description'],
             quantity: document['quantity'],
             price: document['price'],
             imageUrl: document['imageUrl']))

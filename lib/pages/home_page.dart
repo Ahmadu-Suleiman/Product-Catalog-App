@@ -26,10 +26,12 @@ class _HomePageState extends State<HomePage> {
           return Scaffold(
               appBar: AppBar(
                   title: const Text('Product Catalog'), centerTitle: true),
-              body: ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) =>
-                      ProductCard(product: products[index])),
+              body: products.isEmpty
+                  ? const Center(child: Text('Add Products'))
+                  : ListView.builder(
+                      itemCount: products.length,
+                      itemBuilder: (context, index) =>
+                          ProductCard(product: products[index])),
               floatingActionButton: FloatingActionButton(
                   onPressed: () {}, child: const Icon(Icons.add)));
         });
