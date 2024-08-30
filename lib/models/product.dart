@@ -17,7 +17,6 @@ class Product {
   Product.empty();
 
   Map<String, dynamic> get toJson => {
-        'id': id,
         'name': name,
         'description': description,
         'quantity': quantity,

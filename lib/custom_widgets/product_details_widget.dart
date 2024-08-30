@@ -6,9 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import '../models/product.dart';
 
 class ProductDetailsWidget extends StatefulWidget {
-  const ProductDetailsWidget({super.key, required this.product});
+  const ProductDetailsWidget(
+      {super.key, required this.product, this.create = false});
 
   final Product product;
+  final bool create;
 
   @override
   State<ProductDetailsWidget> createState() => _ProductDetailsWidgetState();
