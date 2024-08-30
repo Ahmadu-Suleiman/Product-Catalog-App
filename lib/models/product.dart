@@ -1,10 +1,10 @@
 class Product {
   String? id;
-  String name;
-  String description;
-  int quantity;
-  double price;
-  String imageUrl;
+  String name = '';
+  String description = '';
+  int quantity = 0;
+  double price = 0.0;
+  String imageUrl = '';
 
   Product(
       {this.id,
@@ -13,6 +13,8 @@ class Product {
       required this.quantity,
       required this.price,
       required this.imageUrl});
+
+  Product.empty();
 
   Map<String, dynamic> get toJson => {
         'id': id,
