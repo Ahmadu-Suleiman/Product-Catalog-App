@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:product_catalog_app/models/product.dart';
 
@@ -14,7 +13,13 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> {
   final Product product = Product.empty();
   final ImagePicker picker = ImagePicker();
+  final formKey = GlobalKey<FormState>();
   Uint8List? localImage;
+
+  final TextEditingController controllerName = TextEditingController();
+  final TextEditingController controllerDescription = TextEditingController();
+  final TextEditingController controllerPrice = TextEditingController();
+  final TextEditingController controllerQuantity = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,32 @@ class _AddProductPageState extends State<AddProductPage> {
         appBar: AppBar(title: const Text('Add a new Product')),
         body: Column(children: [
           Align(child: addImageWidget),
+          Form(
+              key: formKey,
+              child: Column(children: [
+                TextFormField(
+                    controller: controllerName,
+                    decoration: const InputDecoration(
+                        labelText: 'Enter a product name'),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Write something' : null),
+                TextFormField(
+                    controller: controllerDescription,
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                        labelText: 'Enter a product name'),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Write something' : null),
+                TextFormField(
+                    controller: controllerPrice,
+                    maxLines: null,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(
+                        labelText: 'Enter a product name'),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Write something' : null)
+              ]))
         ]));
   }
 
