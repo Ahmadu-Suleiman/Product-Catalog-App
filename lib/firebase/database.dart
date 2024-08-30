@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:product_catalog_app/product.dart';
+import 'package:product_catalog_app/models/product.dart';
 
 class Database {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;

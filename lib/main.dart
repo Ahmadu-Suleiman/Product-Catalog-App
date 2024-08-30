@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:product_catalog_app/home_page.dart';
 
-import 'firebase_options.dart';
+import 'firebase/firebase_options.dart';
 
 void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Product Catalog',
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown)),
         home: const HomePage());

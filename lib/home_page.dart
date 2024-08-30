@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_catalog_app/firebase/database.dart';
-import 'package:product_catalog_app/product.dart';
+import 'package:product_catalog_app/models/product.dart';
 import 'package:product_catalog_app/widgets/product_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,14 +19,19 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasError) return const Text('Something went wrong');
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
 
           List<Product> products = Database.productsFromDocs(snapshot.data!);
-          return ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) =>
-                  ProductCard(product: products[index]));
+          return Scaffold(
+              appBar: AppBar(
+                  title: const Text('Product Catalog'), centerTitle: true),
+              body: ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) =>
+                      ProductCard(product: products[index])),
+              floatingActionButton: FloatingActionButton(
+                  onPressed: () {}, child: const Icon(Icons.add)));
         });
   }
 }
