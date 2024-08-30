@@ -52,7 +52,10 @@ class ProductCard extends StatelessWidget {
               actions: <Widget>[
                 TextButton(
                     child: const Text('Edit details'),
-                    onPressed: () => context.go('/edit-product/${product.id}'))
+                    onPressed: () {
+                      context.go('/edit-product/${product.id}');
+                      Navigator.pop(context);
+                    })
               ]);
         });
   }

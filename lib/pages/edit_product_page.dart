@@ -53,7 +53,7 @@ class _EditProductPageState extends State<EditProductPage> {
                           onPressed: deleteProduct,
                           child: const Text('Delete Product')),
                       ElevatedButton(
-                          onPressed: createProduct,
+                          onPressed: updateProduct,
                           child: const Text('Update Product'))
                     ])
               ])));
@@ -62,7 +62,7 @@ class _EditProductPageState extends State<EditProductPage> {
 
   Widget get addImageWidget => Column(children: [
         Image(
-            height: 400,
+            height: 300,
             image: localImage != null
                 ? FileImage(File(localImage!))
                 : NetworkImage(product.imageUrl!),
@@ -80,10 +80,13 @@ class _EditProductPageState extends State<EditProductPage> {
   }
 
   void deleteProduct() async {
+    setState(() => loading = true);
+    await Storage.deleteProductImage(product.imageUrl!);
+    await Database.deleteProduct(product);
     if (mounted) context.pop();
   }
 
-  void createProduct() async {
+  void updateProduct() async {
     if (formKey.currentState!.validate()) {
       setState(() => loading = true);
 
@@ -92,7 +95,7 @@ class _EditProductPageState extends State<EditProductPage> {
         product.imageUrl = imageUrl;
       }
 
-      await Database.addProduct(product);
+      await Database.updateProduct(product);
       if (mounted) context.pop();
     }
   }

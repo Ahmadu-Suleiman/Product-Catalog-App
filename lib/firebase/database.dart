@@ -8,10 +8,13 @@ class Database {
   static Future<DocumentReference> addProduct(Product product) async =>
       _products.add(product.toJson);
 
+  static Future<void> updateProduct(Product product) async =>
+      _products.doc(product.id!).update(product.toJson);
+
   static Future<Product> product(String id) async =>
       productFromDoc(await _products.doc(id).get());
 
-  static Future<void> updateProduct(Product product) async =>
+  static Future<void> deleteProduct(Product product) async =>
       await _products.doc(product.id).delete();
 
   static Stream<QuerySnapshot> get productsStream => _products.snapshots();

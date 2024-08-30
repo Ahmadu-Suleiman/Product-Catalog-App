@@ -45,7 +45,7 @@ class _AddProductPageState extends State<AddProductPage> {
     if (localImage != null) {
       return Column(children: [
         Image(
-            height: 400,
+            height: 300,
             image: FileImage(File(localImage!)),
             errorBuilder: (context, error, stackTrace) =>
                 const Icon(Icons.error),
