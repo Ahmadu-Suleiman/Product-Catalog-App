@@ -33,10 +33,17 @@ class _HomePageState extends State<HomePage> {
                       Theme.of(context).colorScheme.primaryContainer),
               body: products.isEmpty
                   ? const Center(child: Text('Add Products'))
-                  : ListView.builder(
-                      itemCount: products.length,
-                      itemBuilder: (context, index) =>
-                          ProductCard(product: products[index])),
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 4,
+                                  mainAxisSpacing: 8),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) =>
+                              ProductCard(product: products[index]))),
               floatingActionButton: FloatingActionButton(
                   onPressed: () => context.go('/add-product'),
                   child: const Icon(Icons.add)));

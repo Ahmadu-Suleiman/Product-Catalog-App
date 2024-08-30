@@ -9,14 +9,15 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
       elevation: 4,
-      child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(children: [
-            Image.network(product.imageUrl!,
+      clipBehavior: Clip.hardEdge,
+      child: Column(children: [
+        Flexible(
+            child: Image.network(product.imageUrl!,
+                fit: BoxFit.cover,
+                width: double.infinity,
                 errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.error)),
-            Text(product.name),
-            Text('${product.price}'),
-            Text('${product.quantity}')
-          ])));
+                    const Icon(Icons.error))),
+        Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+        Text('${product.price}', maxLines: 1, overflow: TextOverflow.ellipsis)
+      ]));
 }

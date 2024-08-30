@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:product_catalog_app/custom_widgets/product_details_widget.dart';
 import 'package:product_catalog_app/firebase/database.dart';
 import 'package:product_catalog_app/firebase/storage.dart';
 import 'package:product_catalog_app/models/product.dart';
 import 'package:product_catalog_app/shared/utility.dart';
 import 'package:product_catalog_app/widgets/loading_widget.dart';
+import 'package:product_catalog_app/widgets/product_details_widget.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
