@@ -4,7 +4,7 @@ class Product {
   String description = '';
   int quantity = 0;
   double price = 0.0;
-  String imageUrl = '';
+  String? imageUrl;
 
   Product(
       {this.id,

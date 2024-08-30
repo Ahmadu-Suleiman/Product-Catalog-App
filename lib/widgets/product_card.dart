@@ -12,7 +12,9 @@ class ProductCard extends StatelessWidget {
       child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(children: [
-            Image.network(product.imageUrl),
+            Image.network(product.imageUrl!,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.error)),
             Text(product.name),
             Text('${product.price}'),
             Text('${product.quantity}')
