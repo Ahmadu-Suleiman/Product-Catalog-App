@@ -50,7 +50,6 @@ class _AddProductPageState extends State<AddProductPage> {
             errorBuilder: (context, error, stackTrace) =>
                 const Icon(Icons.error),
             fit: BoxFit.fitWidth),
-        const SizedBox(height: 20),
         TextButton(onPressed: addImage, child: const Text('Replace image'))
       ]);
     } else {
