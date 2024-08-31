@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:product_catalog_app/firebase/database.dart';
-import 'package:product_catalog_app/models/product.dart';
-import 'package:product_catalog_app/widgets/filter_widget.dart';
-import 'package:product_catalog_app/widgets/loading_widget.dart';
-import 'package:product_catalog_app/widgets/product_card.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import '../firebase/database.dart';
+import '../models/product.dart';
+import '../widgets/loading_widget.dart';
+import '../widgets/product_card.dart';
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+class FilteredProductsPage extends StatelessWidget {
+  const FilteredProductsPage(
+      {super.key,
+      required this.priceMin,
+      required this.priceMax,
+      required this.category});
 
-class _HomePageState extends State<HomePage> {
+  final double? priceMin, priceMax;
+  final String? category;
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: Database.productsStream,
+    return FutureBuilder(
+        future: Database.filteredProducts(priceMin, priceMax, category),
         builder: (context, snapshot) {
           if (snapshot.hasError) return const Text('Something went wrong');
 
@@ -28,13 +29,9 @@ class _HomePageState extends State<HomePage> {
           List<Product> products = Database.productsFromDocs(snapshot.data!);
           return Scaffold(
               appBar: AppBar(
-                  title: const Text('Product Catalog',
+                  title: const Text('Filtered Products',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   centerTitle: true,
-                  actions: [
-                    IconButton(
-                        onPressed: showFilter, icon: const Icon(Icons.tune))
-                  ],
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer),
               body: products.isEmpty
@@ -49,16 +46,7 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisSpacing: 8),
                           itemCount: products.length,
                           itemBuilder: (context, index) =>
-                              ProductCard(product: products[index]))),
-              floatingActionButton: FloatingActionButton(
-                  onPressed: () => context.go('/add-product'),
-                  child: const Icon(Icons.add)));
+                              ProductCard(product: products[index]))));
         });
-  }
-
-  void showFilter() {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) => const FilterWidget());
   }
 }
