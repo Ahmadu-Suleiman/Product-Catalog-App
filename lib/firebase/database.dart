@@ -19,7 +19,7 @@ class Database {
 
   static Stream<QuerySnapshot> get productsStream => _products.snapshots();
 
-  static Future<QuerySnapshot> filteredProducts(
+  static Stream<QuerySnapshot<Object?>> filteredProductsStream(
       double? priceMin, double? priceMax, String? category) {
     Query query =
         _products.where('price', isGreaterThanOrEqualTo: priceMin ?? 0);
@@ -27,7 +27,7 @@ class Database {
       query = query.where('price', isLessThanOrEqualTo: priceMax);
     }
     if (category != null) query = query.where('category', isEqualTo: category);
-    return query.get();
+    return query.snapshots();
   }
 
   static Product productFromDoc(DocumentSnapshot snapshot) {

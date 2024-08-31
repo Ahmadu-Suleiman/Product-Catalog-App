@@ -17,8 +17,8 @@ class FilteredProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: Database.filteredProducts(priceMin, priceMax, category),
+    return StreamBuilder(
+        stream: Database.filteredProductsStream(priceMin, priceMax, category),
         builder: (context, snapshot) {
           if (snapshot.hasError) return const Text('Something went wrong');
 
