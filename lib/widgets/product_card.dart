@@ -47,7 +47,8 @@ class ProductCard extends StatelessWidget {
                 ...info('Name', product.name),
                 ...info('Description', product.description),
                 ...info('Price', '${product.price}'),
-                ...info('Quantity', '${product.quantity}')
+                ...info('Quantity', '${product.quantity}'),
+                ...info('Category', '${product.category}')
               ])),
               actions: <Widget>[
                 TextButton(

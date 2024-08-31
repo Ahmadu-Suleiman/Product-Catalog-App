@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_catalog_app/shared/product_category.dart';
 
 import '../models/product.dart';
 
@@ -92,7 +93,16 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                   validator: (value) =>
                       (value!.isEmpty || int.tryParse(value.trim()) == null)
                           ? 'Enter a valid number'
-                          : null)
+                          : null),
+              DropdownButtonFormField<ProductCategory>(
+                  value: ProductCategory.category(product.category),
+                  items: ProductCategory.dropDownItems,
+                  hint: const Text('Choose category'),
+                  icon: const Icon(Icons.category),
+                  onChanged: (category) =>
+                      setState(() => product.category = category?.name),
+                  validator: (value) =>
+                      value == null ? 'Please select a category' : null)
             ])));
   }
 }

@@ -27,6 +27,7 @@ class Database {
           description: snapshot['description'],
           quantity: snapshot['quantity'],
           price: snapshot['price'],
+          category: snapshot['category'],
           imageUrl: snapshot['imageUrl']);
     } else {
       return Product.empty();
@@ -42,6 +43,7 @@ class Database {
             description: document['description'],
             quantity: document['quantity'],
             price: document['price'],
+            category: document['category'],
             imageUrl: document['imageUrl']))
         .toList();
   }
