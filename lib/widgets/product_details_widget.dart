@@ -53,6 +53,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
             child: Column(children: [
               TextFormField(
                   controller: controllerName,
+                  textCapitalization: TextCapitalization.words,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: const InputDecoration(
                       hintText: 'Enter product name',
@@ -61,6 +62,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                       value!.trim().isEmpty ? 'Enter product name' : null),
               TextFormField(
                   controller: controllerDescription,
+                  textCapitalization: TextCapitalization.sentences,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: null,
                   decoration: const InputDecoration(

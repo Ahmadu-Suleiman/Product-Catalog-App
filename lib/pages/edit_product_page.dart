@@ -69,10 +69,13 @@ class _EditProductPageState extends State<EditProductPage> {
             errorBuilder: (context, error, stackTrace) =>
                 const Icon(Icons.error),
             fit: BoxFit.fitWidth),
-        TextButton(onPressed: addImage, child: const Text('Replace image'))
+        TextButton.icon(
+            onPressed: replaceImage,
+            label: const Text('Replace image'),
+            icon: const Icon(Icons.change_circle))
       ]);
 
-  void addImage() async {
+  void replaceImage() async {
     String? image;
     XFile? file = await picker.pickImage(source: ImageSource.gallery);
     if (file != null) image = file.path;
