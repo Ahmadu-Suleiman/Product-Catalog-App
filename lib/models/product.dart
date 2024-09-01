@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Product {
   String? id;
+  Timestamp timestamp = Timestamp.now();
   String name = '';
   String description = '';
   double price = 0.0;
@@ -9,6 +12,7 @@ class Product {
 
   Product(
       {this.id,
+      required this.timestamp,
       required this.name,
       required this.description,
       required this.price,
@@ -19,6 +23,7 @@ class Product {
   Product.empty();
 
   Map<String, dynamic> get toJson => {
+        'timestamp': timestamp,
         'name': name,
         'description': description,
         'price': price,

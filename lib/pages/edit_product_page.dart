@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,7 +51,7 @@ class _EditProductPageState extends State<EditProductPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                          onPressed: deleteProduct,
+                          onPressed: showDeleteDialog,
                           child: const Text('Delete Product')),
                       ElevatedButton(
                           onPressed: updateProduct,
@@ -93,6 +94,7 @@ class _EditProductPageState extends State<EditProductPage> {
     if (formKey.currentState!.validate()) {
       setState(() => loading = true);
 
+      product.timestamp = Timestamp.now();
       if (localImage != null) {
         String imageUrl = await Storage.uploadProductImage(localImage!);
         product.imageUrl = imageUrl;
@@ -101,5 +103,26 @@ class _EditProductPageState extends State<EditProductPage> {
       await Database.updateProduct(product);
       if (mounted) context.pop();
     }
+  }
+
+  void showDeleteDialog() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: const Text('Delete product'),
+              content: const Text('Do you want to delete this product?'),
+              actions: [
+                TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () => Navigator.of(context).pop()),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      deleteProduct();
+                    },
+                    child: const Text('Delete'))
+              ]);
+        });
   }
 }

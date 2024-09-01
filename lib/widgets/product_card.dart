@@ -14,15 +14,20 @@ class ProductCard extends StatelessWidget {
           elevation: 4,
           clipBehavior: Clip.hardEdge,
           child: Column(children: [
-            Flexible(
+            Expanded(
                 child: Image.network(product.imageUrl!,
                     fit: BoxFit.cover,
                     width: double.infinity,
                     errorBuilder: (context, error, stackTrace) =>
                         const Icon(Icons.error))),
-            Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-            Text('${product.price}',
-                maxLines: 1, overflow: TextOverflow.ellipsis)
+            Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(children: [
+                  Text(product.name,
+                      maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text('${product.price}',
+                      maxLines: 1, overflow: TextOverflow.ellipsis)
+                ]))
           ])));
 
   void viewDetails(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,6 +79,7 @@ class _AddProductPageState extends State<AddProductPage> {
       if (formKey.currentState!.validate()) {
         setState(() => creating = true);
 
+        product.timestamp = Timestamp.now();
         String imageUrl = await Storage.uploadProductImage(localImage!);
         product.imageUrl = imageUrl;
         await Database.addProduct(product);

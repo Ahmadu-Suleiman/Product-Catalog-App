@@ -103,6 +103,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                   icon: const Icon(Icons.category),
                   onChanged: (category) =>
                       setState(() => product.category = category?.name),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) =>
                       value == null ? 'Please select a category' : null)
             ])));

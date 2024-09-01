@@ -17,7 +17,8 @@ class Database {
   static Future<void> deleteProduct(Product product) async =>
       await _products.doc(product.id).delete();
 
-  static Stream<QuerySnapshot> get productsStream => _products.snapshots();
+  static Stream<QuerySnapshot> get productsStream =>
+      _products.orderBy('timestamp', descending: true).snapshots();
 
   static Stream<QuerySnapshot<Object?>> filteredProductsStream(
       double? priceMin, double? priceMax, String? category) {
@@ -27,13 +28,14 @@ class Database {
       query = query.where('price', isLessThanOrEqualTo: priceMax);
     }
     if (category != null) query = query.where('category', isEqualTo: category);
-    return query.snapshots();
+    return query.orderBy('timestamp', descending: true).snapshots();
   }
 
   static Product productFromDoc(DocumentSnapshot snapshot) {
     if (snapshot.exists) {
       return Product(
           id: snapshot.id,
+          timestamp: snapshot['timestamp'],
           name: snapshot['name'],
           description: snapshot['description'],
           quantity: snapshot['quantity'],
@@ -50,6 +52,7 @@ class Database {
     return documents
         .map((document) => Product(
             id: document.id,
+            timestamp: document['timestamp'],
             name: document['name'],
             description: document['description'],
             quantity: document['quantity'],
