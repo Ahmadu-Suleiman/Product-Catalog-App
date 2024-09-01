@@ -24,7 +24,9 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: Column(children: [
                   Text(product.name,
-                      maxLines: 1, overflow: TextOverflow.ellipsis),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis),
                   Text('${product.price}',
                       maxLines: 1, overflow: TextOverflow.ellipsis)
                 ]))
